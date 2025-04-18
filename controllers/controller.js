@@ -156,7 +156,7 @@ const Signup = async (req, res) => {
         const { name, username, email, password } = req.body;
         let id = GenerateRandomString(20);
         let enc = await EncryptPassword(password);
-        if (enc) {
+        if (!enc) {
             return res.render("Signup", { message: "Error while creating Account" });
         } else {
             let acc = new Accounts({
