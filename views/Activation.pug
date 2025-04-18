@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/Activation.css")
+    link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
+    title Qastra: Account Activation
+  body
+    include ./PreLoader.pug
+    .background
+      img(src="/media/interface-background-3.jpeg", alt="")
+      .shade
+    .main
+      h1 Qastra
+      h4 Account Activation
+      form(action="/activation", method="post")
+        input(type="text", placeholder="Verification Code" name="code")
+        input(type="submit", value="Activate Account")
+    script(src="/js/Activation.js")
+    include ./footer.pug

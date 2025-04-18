@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/Question.css")
+    link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
+    title Qastra: Ask a Question
+
+  body
+    include ./PreLoader.pug
+    .background
+      img(src="/media/interface-background-3.jpeg", alt="")
+      .shade
+
+    .main
+      h1 Qastra
+      h4 Drop Your Curiosity
+      form(action="/ask-a-question", method="post")
+        input(type="text", placeholder="Topic", required, autofocus, maxlength="60" name="topic")
+        input(type="text", placeholder="Question", maxlength="150", name="question")
+        input(type="submit", value="Ask Question")
+  include ./footer.pug
+  script(src="/js/Question.js")

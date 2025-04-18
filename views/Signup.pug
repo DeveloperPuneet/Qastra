@@ -1,0 +1,67 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/Signup.css")
+        link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
+        title Qastra: Signup
+
+    body
+        include ./PreLoader.pug
+        .background
+            img(src="/media/interface-background-3.jpeg", alt="")
+            .shade
+
+        .main
+            h1 Qastra
+            h4 Create Account
+            form(action="/signup", method="post")
+                input(
+                    type="text", 
+                    placeholder="Jhone Dhoe", 
+                    required, 
+                    autocomplete="off", 
+                    spellcheck="false", 
+                    autofocus, 
+                    name="name"
+                )
+                input(
+                    id="username",
+                    type="text", 
+                    placeholder="_Jhone_Doe_", 
+                    required, 
+                    autocomplete="off", 
+                    spellcheck="false", 
+                    name="username", 
+                    pattern="^\\S+$", 
+                    title="Username must not contain spaces"
+                )
+                input(
+                    type="email", 
+                    placeholder="abc.xyz@mn.com", 
+                    required, 
+                    autocomplete="off", 
+                    spellcheck="false", 
+                    name="email"
+                )
+                input(
+                    type="password", 
+                    placeholder="**** ****", 
+                    required, 
+                    autocomplete="off", 
+                    spellcheck="false", 
+                    name="password", 
+                    pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$", 
+                    title="Password must be at least 8 characters, include 1 number and 1 special character"
+                )
+                p Already have an Account? 
+                    a(href="/signin") Sign in
+                input(type="submit", value="Create Account")
+    include ./footer.pug
+    script.
+        const usernameInput = document.getElementById("username");
+        usernameInput.addEventListener("input", () => {
+            usernameInput.value = usernameInput.value.replace(/\s/g, "");
+        });
+    script(src="/js/Signup.js")

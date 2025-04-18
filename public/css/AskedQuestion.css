@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --cosmic-indigo: #8F00FF;
+    --aura-cyan: #00F5FF;
+    --plasma-pink: #FF4DDE;
+    --event-horizon: #0B0C16;
+    --orbit-glow: #1A1B2E;
+    --stellar-white: #F8F9FA;
+    --dim-moon: #B2B6C8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: "Poppins", sans-serif;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    transition: all .5s linear;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    width: 100vw;
+    overflow-x: hidden;
+    background: #0B0C16;
+}
+
+.background {
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 65vh;
+    z-index: -100;
+}
+
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(10px);
+}
+
+.shade {
+    height: 101%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(#1a1b2eb0, #1a1b2eb0, #1a1b2eb0, var(--event-horizon));
+    filter: blur(2px);
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 65vh;
+    background-image: url("./media/interface-background-4.jpeg");
+    z-index: -100;
+}
+
+.navigation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 12vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.logo {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    height: 90%;
+    aspect-ratio: 1/1;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo h2 {
+    color: var(--stellar-white);
+    margin-left: 20px;
+    font-size: 1.2rem;
+    position: relative;
+    top: 30%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+}
+
+.colored-text {
+    background: linear-gradient(45deg, var(--cosmic-indigo), var(--aura-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.quest {
+    text-align: center;
+    padding: 10px;
+    z-index: 1000;
+    margin-top: 12vh;
+    color: var(--dim-moon);
+    padding-top: 40px;
+}
+
+.quest h4 {
+    margin-top: 10px;
+    color: var(--stellar-white);
+}
+
+.answer {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.answer form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.answer form textarea {
+    min-width: 90vw;
+    max-width: 90vw;
+    min-height: 100px;
+    border-radius: 10px;
+    max-height: 800px;
+    background-color: #1A1B2E;
+    border: none;
+    outline: none;
+    padding: 10px;
+    padding-left: 20px;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.answer form input[type="submit"] {
+    margin-top: 10px;
+    width: 90vw;
+    color: #fff;
+    border-radius: 50px;
+    outline: none;
+    border: none;
+    background: var(--orbit-glow);
+    padding: 10px;
+}
+
+.answers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card {
+    color: #fff;
+    padding: 10px;
+    background: var(--orbit-glow);
+    margin-top: 20px;
+    width: 800px;
+    border-radius: 10px;
+    min-height: 100px;
+    word-wrap: break-word;        
+    overflow-wrap: break-word;    
+    white-space: pre-wrap;         
+    max-width: 100%;              
+    box-sizing: border-box;
+}
+
+.card h5 {
+    color: var(--dim-moon);
+}
+
+.card p {
+    margin-top: 10px;
+    font-size: .9rem;
+}
+
+.btns {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 70px;
+    padding-left: 50px;
+    margin-bottom: 30px;
+}
+
+.btns a:nth-child(1){
+    text-decoration: none;
+    color: #fff;
+    background: var(--cosmic-indigo);
+    padding: 8px 40px;
+    border-radius: 50px;
+}
+
+.btns a:nth-child(2){
+    text-decoration: none;
+    color: #fff;
+    background: var(--plasma-pink);
+    padding: 8px 40px;
+    border-radius: 50px;
+}

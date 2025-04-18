@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/Signin.css")
+    link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
+    title Qastra: Enter Email
+  body
+    include ./PreLoader.pug
+    .background
+      img(src="/media/interface-background-4.jpeg", alt="")
+      .shade
+    .main
+      h1 Qastra
+      h4 Enter email to reset Password
+      form(action="/enter-email", method="post")
+        input(type="email", placeholder="abc.xyz@mn.com", required, autocomplete="off", spellcheck="false", autofocus name="email")
+        input(type="submit", value="Send Reset Code")
+    script(src="/js/Signin.js")
+  include ./footer.pug

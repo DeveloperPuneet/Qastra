@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/AccountActions.css")
+    link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
+    title Qastra: Account Actions
+  body
+    include ./PreLoader.pug
+    .background
+      img(src="/media/interface-background-2.jpeg", alt="")
+      .shade
+    .main
+      h1 Account Actions
+      p Deleting your account is permanent. All your data will be erased completely and cannot be recovered. Please proceed only if you're sure you want to delete your account.
+      .options
+        a(href="/logout") Logout
+        a(href="/delete-account") Delete Account
+    script(src="/js/AccountActions.js")
+    include ./footer.pug

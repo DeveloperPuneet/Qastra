@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --cosmic-indigo: #8F00FF;
+    --aura-cyan: #00F5FF;
+    --plasma-pink: #FF4DDE;
+    --event-horizon: #0B0C16;
+    --orbit-glow: #1A1B2E;
+    --stellar-white: #F8F9FA;
+    --dim-moon: #B2B6C8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: "Poppins", sans-serif;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    transition: all .5s linear;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.background {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -100;
+}
+
+.background img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    z-index: -100;
+}
+
+.shade {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(45deg, #0B0C16, #1A1B2E);
+    opacity: .7;
+    z-index: -10;
+}
+
+.main{
+    margin-bottom: 50px;
+}
+
+.main h1 {
+    background: linear-gradient(45deg, var(--cosmic-indigo), var(--aura-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    font-size: 4rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.main p {
+    color: var(--stellar-white);
+    width: 800px;
+    text-align: center;
+    text-wrap: balance;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.options{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.options a{
+    color: #fff;
+    background-color: var(--plasma-pink);
+    text-decoration: none;
+    margin: 20px;
+    padding: 10px;
+    min-width: 400px;
+    text-align: center;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.options a:nth-child(2){
+    background-color: var(--cosmic-indigo);
+}

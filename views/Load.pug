@@ -1,0 +1,73 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/Load.css")
+    link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
+    title Qastra -One Question Closer to Clarity
+
+  body
+    include ./PreLoader.pug
+    // navigation
+    .navigation
+      .logo
+        img(src="/media/Qastra.jpeg", alt="")
+        h2 Qatra
+      .menu
+        a(href="/signup") Sign up
+        a(href="/signin") Sign in
+
+    // background
+    #background
+      img(src="/media/interface-background-1.jpeg", alt="")
+      .shade-bg
+
+    // random shapes
+    .random-shape-1
+      img(src="/media/interface-random-pattern-1.png", alt="")
+    .random-shape-2
+      img(src="/media/interface-random-pattern-2.png", alt="")
+
+    // sec-1
+    .sec-1
+      h1 Qastra
+      h2 One Question Closer to Clarity
+      p Qastra is a friendly platform where anyone can ask questions, share thoughts, and explore ideas with a curious community.
+      .account-landing
+        a(href="/signup") Sign up
+        a(href="/signin") Sign in
+
+    // sec-2
+    .sec-2
+      h1 How 
+        span.effect-gradiesnt-effect.font-size-3-5rem Qatra 
+        | works
+      .ask-steps
+        .step-card
+          h2 Ask Anything
+          h4 Write your doubts, ideas, or questions freely.
+          p No limits — just drop your thoughts and let curiosity flow.
+        .step-card
+          h2 Get Responses
+          h4 The community jumps in to answer, explain, or discuss.
+          p Helpful replies, real insights, or even fun debates.
+        .step-card
+          h2 Explore Topics
+          h4 Discover trending questions and topics.
+          p Learn from others, upvote answers, or join conversations anytime.
+
+    // sec-3
+    .sec-3
+      h1 Why 
+        span.effect-gradiesnt-effect.font-size-3-5rem Qatra
+      p Qastra is your safe space to speak freely and ask anything without judgment — whether it's a small doubt or a big idea. You're joining a curious, growing community that loves sharing knowledge and different perspectives. From trending discussions to niche questions, there's always something new to explore. And with full control over your presence, you can choose to stay anonymous or step into the spotlight whenever you like.
+
+    // sec-4
+    .sec-4
+      h1 Join the Conversation
+      .sec-4-imgs
+        img(src="/media/interface-background-4.jpeg", alt="")
+        img(src="/media/interface-background-3.jpeg", alt="")
+    include ./footer.pug
+  script(src="/js/Load.js")

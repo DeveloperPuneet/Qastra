@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --cosmic-indigo: #8F00FF;
+    --aura-cyan: #00F5FF;
+    --plasma-pink: #FF4DDE;
+    --event-horizon: #0B0C16;
+    --orbit-glow: #1A1B2E;
+    --stellar-white: #F8F9FA;
+    --dim-moon: #B2B6C8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: "Poppins", sans-serif;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    transition: all .5s linear;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    width: 100vw;
+    overflow-x: hidden;
+    background: #0B0C16;
+}
+
+.background {
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 65vh;
+    z-index: -100;
+}
+
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(10px);
+}
+
+.shade {
+    height: 101%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(#1a1b2eb0, #1a1b2eb0, #1a1b2eb0, var(--event-horizon));
+    filter: blur(2px);
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 65vh;
+    background-image: url("./media/interface-background-4.jpeg");
+    z-index: -100;
+}
+
+.navigation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 12vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.logo {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    height: 90%;
+    aspect-ratio: 1/1;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo h2 {
+    color: var(--stellar-white);
+    margin-left: 20px;
+    font-size: 1.2rem;
+    position: relative;
+    top: 30%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+}
+
+.navigation .options {
+    height: 100%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation .options a {
+    color: var(--stellar-white);
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+
+.sec-1 {
+    height: calc(65vh - 12vh);
+    width: 100vw;
+    z-index: 100;
+    position: relative;
+    top: 12vh;
+    padding: 10px;
+    overflow: hidden;
+    color: var(--stellar-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 50px;
+}
+
+.colored-text {
+    background: linear-gradient(45deg, var(--cosmic-indigo), var(--aura-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.sec-1 h1 {
+    font-size: 3rem;
+}
+
+.text-size-3-5rem {
+    font-size: 3.5rem;
+}
+
+.landind-txt {
+    margin-top: 20px;
+}
+
+.ask-ques {
+    margin-top: 25px;
+    padding-top: 15px;
+}
+
+.ask-ques a {
+    border-radius: 50px;
+    padding: 10px 30px;
+    background: linear-gradient(45deg, var(--plasma-pink), var(--cosmic-indigo));
+    color: var(--stellar-white);
+    text-decoration: none;
+}
+
+.random-shape-1 {
+    height: 400px;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: rotate(45deg);
+}
+
+.random-shape-1 img {
+    height: 100%;
+    width: 100%;
+}
+
+.sec-2 {
+    width: 100vw;
+    color: #fff;
+    margin-top: 10vh;
+    padding: 10px;
+}
+
+.sec-2 h2 {
+    text-align: center;
+}
+
+.sec-2 p {
+    text-align: center;
+    color: var(--dim-moon);
+    margin-top: 20px;
+}
+
+.questions {
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--dim-moon);
+}
+
+.questions a {
+    text-decoration: none;
+    margin-top: 20px;
+    background-color: var(--orbit-glow);
+    padding: 20px;
+    width: 850px;
+    border-radius: 10px;
+}
+
+.questions h4 {
+    color: var(--stellar-white);
+}
+
+.questions p {
+    color: var(--dim-moon);
+    margin-top: 10px;
+}
+
+.ext-details{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

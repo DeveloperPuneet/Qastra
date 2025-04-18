@@ -1,0 +1,57 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/Dashboard.css")
+    link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
+    title Qastra
+  body
+    include ./PreLoader.pug
+    .background
+      img(src="/media/interface-background-4.jpeg", alt="")
+      .shade
+
+    .navigation
+      .logo
+        img(src="/media/Qastra.jpeg", alt="Logo")
+        h2 Qastra
+      .options
+        a(href="/settings")
+          i.fa-solid.fa-gear
+        a(href="/notification", style=`margin-left: 20px;${unreadExists ? 'border-bottom: 1px solid red;' : ''}`)
+          i.fa-solid.fa-bell
+    //- random shapes
+    .random-shape-1
+      img(src="/media/interface-stars.png", alt="")
+
+    //- main sections
+    .sec-1
+      h1
+        | Hey! 
+        span.colored-text.text-size-3-5rem #{acc.Name}
+      .landind-txt
+        | What’s puzzling you today?
+        br
+        | Drop a question, join a topic, or just vibe through the galaxy of thoughts.
+      .ask-ques
+        a(href="/ask-a-question") Ask a Question
+        a(href="/saved-questions", style="margin-left: 10px;") Saved Question
+        a(href="/answered-question", style="margin-left: 10px;") Answered Question
+
+    .sec-2
+      h2.text-size-3-5rem Topics
+      p Drop your cosmic thought and Begin your Qastra quest
+
+    .questions
+      each q in ques
+        a.card(href=`/question/${q.QID}`)
+          h4= q.Topic
+          p= q.Question
+          .ext-details
+            p Answers: #{q.answerCount}
+            p Saved: #{q.Saved.length}
+
+    script(src="/js/Dashboard.js")
+    script(src="https://kit.fontawesome.com/45c7c9c055.js", crossorigin="anonymous")
+    include ./footer.pug

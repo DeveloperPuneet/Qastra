@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/Profile.css")
+    link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
+    title Qastra: Profile
+  body
+    include ./PreLoader.pug
+    .background
+      img(src="/media/interface-background-3.jpeg", alt="")
+      .shade
+    .main
+      h1.colored-text Qastra
+      h1 Profile
+      form(action="/edit-profile", method="post")
+        input(type="text", required, placeholder="Name", name="name" value=acc.Name maxlenght="12")
+        input(type="text", readonly, required, placeholder="Username" value=acc.Username maxlenght="100")
+        input(type="email", readonly, required, placeholder="Email" value=acc.Email)
+        input(type="text", readonly, required, placeholder="Identity" value=acc.Identity)
+        input(type="submit", value="Save Details")
+    script(src="/js/Profile.js")
+    include ./footer.pug

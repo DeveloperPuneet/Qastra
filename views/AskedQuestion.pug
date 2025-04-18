@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/AskedQuestion.css")
+    link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
+    title Qastra
+  body
+    include ./PreLoader.pug
+    .background
+      img(src="/media/interface-background-4.jpeg", alt="")
+      .shade
+    .navigation
+      .logo
+        img(src="/media/Qastra.jpeg", alt="Logo")
+        h2 Qastra
+    .quest
+      .btns
+        a(href=`/save/${ques.QID}` id="save") Save
+        a(href=`/report/${ques.QID}`) Report
+      h1 Topic: #{ques.Topic}
+      h4 Question: #{ques.Question}
+    h2(style="text-align: center;margin: 10px;color: #b4b4b4;") Answers
+    .answer
+      form(action=`/answer/${ques.QID}`, method="post")
+        textarea(id="", required, autofocus, name="answer")
+        input(type="submit", value="Send Opinoin")
+    .answers
+      each a in ans
+        .card
+          h5 #{a.authorName}
+          p(style="white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word;") #{a.Answer}
+    script(src="/js/AskedQuestion.js")
+    include ./footer.pug

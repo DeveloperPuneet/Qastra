@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/Signin.css")
+    link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
+    title Qastra: Signin
+
+  body
+    include ./PreLoader.pug
+    .background
+      img(src="/media/interface-background-3.jpeg", alt="")
+      .shade
+
+    .main
+      h1 Qastra
+      h4 Sign in to your Account
+      form(action="/signin", method="post")
+        input(type="email", placeholder="abc.xyz@mn.com", required, autocomplete="off", spellcheck="false", autofocus name="email")
+        input(type="password", placeholder="**** ****", required, autocomplete="off", spellcheck="false" name="password")
+        .log-options
+          a(href="/signup") Signup
+          a(href="/enter-email") Forgot Password
+        input(type="submit", value="Sign In Account")
+  include ./footer.pug
+  script(src="/js/Signin.js")
