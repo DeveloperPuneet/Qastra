@@ -2,6 +2,7 @@
 const bcrypt = require("bcrypt");
 const nodemailer = require('nodemailer');
 const randomstring = require('randomstring');
+const mongoose = require("mongoose");
 
 // * mongodb models
 const Accounts = require("../models/Accounts");
