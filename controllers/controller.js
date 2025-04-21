@@ -653,6 +653,7 @@ const { GridFSBucket } = require('mongodb');
 const Media = require('../models/Media');
 const formidable = require('formidable');
 const fs = require('fs');
+const mongoose = require('mongoose'); // Ensure mongoose is imported if needed
 
 const UploadPage = async (req, res) => {
   const acc = await Accounts.findOne({ Identity: req.session.user });
@@ -672,23 +673,40 @@ const UploadMedia = async (req, res) => {
     if (err) return res.status(500).send("Form parse error");
 
     const file = files.file;
+    if (!file || !file.filepath) {
+      return res.status(400).send("No file uploaded or file path missing");
+    }
+
+    // Replace spaces with hyphens in the file name
+    const fileName = file.originalFilename.replace(/ /g, '-');
     const db = mongoose.connection.db;
     const bucket = new GridFSBucket(db, { bucketName: "media" });
 
-    const uploadStream = bucket.openUploadStream(file.originalFilename);
-    const readStream = fs.createReadStream(file.filepath);
+    // Debugging log
+    console.log('File received:', file);
 
-    readStream.pipe(uploadStream)
-      .on('error', err => res.status(500).send("Upload error"))
-      .on('finish', async () => {
-        const media = new Media({
-          filename: file.originalFilename,
-          fileId: uploadStream.id,
-          uploadedBy: acc.Identity
+    try {
+      const uploadStream = bucket.openUploadStream(fileName); // Use modified file name
+      const readStream = fs.createReadStream(file.filepath);
+
+      readStream.pipe(uploadStream)
+        .on('error', err => {
+          console.error('Upload error:', err);
+          res.status(500).send("Upload error");
+        })
+        .on('finish', async () => {
+          const media = new Media({
+            filename: fileName,  // Store the modified file name
+            fileId: uploadStream.id,
+            uploadedBy: acc.Identity
+          });
+          await media.save();
+          return res.redirect("/render-img");
         });
-        await media.save();
-        return res.redirect("/render-img");
-      });
+    } catch (err) {
+      console.error('Error during file upload:', err);
+      res.status(500).send("Internal server error");
+    }
   });
 };
 
