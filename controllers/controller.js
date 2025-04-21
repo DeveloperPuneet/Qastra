@@ -648,6 +648,66 @@ const deleteAccount = async (req, res) => {
     }
 };
 
+const { GridFSBucket } = require('mongodb');
+const Media = require('../models/Media');
+const formidable = require('formidable');
+const fs = require('fs');
+
+const UploadPage = async (req, res) => {
+  const acc = await Accounts.findOne({ Identity: req.session.user });
+  if (acc && acc.admin) {
+    return res.render("Upload");
+  } else {
+    return res.status(403).send("Access Denied ❌");
+  }
+};
+
+const UploadMedia = async (req, res) => {
+  const acc = await Accounts.findOne({ Identity: req.session.user });
+  if (!acc || !acc.admin) return res.status(403).send("Forbidden");
+
+  const form = new formidable.IncomingForm({ multiples: false });
+  form.parse(req, async (err, fields, files) => {
+    if (err) return res.status(500).send("Form parse error");
+
+    const file = files.file;
+    const db = mongoose.connection.db;
+    const bucket = new GridFSBucket(db, { bucketName: "media" });
+
+    const uploadStream = bucket.openUploadStream(file.originalFilename);
+    const readStream = fs.createReadStream(file.filepath);
+
+    readStream.pipe(uploadStream)
+      .on('error', err => res.status(500).send("Upload error"))
+      .on('finish', async () => {
+        const media = new Media({
+          filename: file.originalFilename,
+          fileId: uploadStream.id,
+          uploadedBy: acc.Identity
+        });
+        await media.save();
+        return res.redirect("/render-img");
+      });
+  });
+};
+
+const RenderImages = async (req, res) => {
+  const images = await Media.find().sort({ createdAt: -1 });
+  const files = images.map(file => ({
+    url: `/media/${file.fileId}`,
+    filename: file.filename
+  }));
+
+  res.render("Blog", { mediaFiles: files });
+};
+
+const ServeImage = async (req, res) => {
+  const db = mongoose.connection.db;
+  const bucket = new GridFSBucket(db, { bucketName: 'media' });
+  const downloadStream = bucket.openDownloadStream(new mongoose.Types.ObjectId(req.params.id));
+  downloadStream.pipe(res);
+};
+
 // * exporting functions 
 module.exports = {
     Load,
@@ -685,5 +745,9 @@ module.exports = {
     EditProfile,
     AccountActionsLoad,
     Logout,
-    deleteAccount
+    deleteAccount,
+    UploadPage,
+    UploadMedia,
+    RenderImages,
+    ServeImage
 }

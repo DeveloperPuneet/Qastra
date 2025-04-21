@@ -90,6 +90,10 @@ router.get("/profile", auth.isLogin, controller.ProfileLoad);
 router.get("/account-actions", auth.isLogin, controller.AccountActionsLoad);
 router.get("/logout", auth.isLogin, controller.Logout);
 router.get("/delete-account", auth.isLogin, controller.deleteAccount);
+router.get("/upload", auth.isLogin, controller.UploadPage);
+router.post("/upload", auth.isLogin, controller.UploadMedia);
+router.get("/render-img", controller.RenderImages);
+router.get("/media/:id", controller.ServeImage);
 
 // * handling requests 
 router.post("/signup", controller.Signup);
