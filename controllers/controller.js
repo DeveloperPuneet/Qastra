@@ -655,75 +655,74 @@ const formidable = require('formidable');
 const fs = require('fs');
 
 const UploadPage = async (req, res) => {
-    const acc = await Accounts.findOne({ Identity: req.session.user });
-    if (acc && acc.admin == true) {
-        return res.render("Upload");
-    } else {
-        return res.status(403).send("Access Denied ❌");
-    }
+  const acc = await Accounts.findOne({ Identity: req.session.user });
+  if (acc && acc.admin == true) {
+    return res.render("Upload");
+  } else {
+    return res.status(403).send("Access Denied ❌");
+  }
 };
 
 const UploadMedia = async (req, res) => {
-    const acc = await Accounts.findOne({ Identity: req.session.user });
-    if (!acc || !acc.admin) return res.status(403).send("Forbidden");
+  const acc = await Accounts.findOne({ Identity: req.session.user });
+  if (!acc || !acc.admin) return res.status(403).send("Forbidden");
 
-    const form = new formidable.IncomingForm({ multiples: false });
-    form.parse(req, async (err, fields, files) => {
-        if (err) return res.status(500).send("Form parse error");
+  const form = new formidable.IncomingForm({ multiples: false });
+  form.parse(req, async (err, fields, files) => {
+    if (err) return res.status(500).send("Form parse error");
 
-        const file = files.file;
-        if (!file || !file.filepath) {
-            return res.status(400).send(file);
-        }
+    // Ensure files.file is an array or a single object
+    const file = Array.isArray(files.file) ? files.file[0] : files.file;
 
-        // Replace spaces with hyphens in the file name
-        const fileName = file.originalFilename.replace(/ /g, '-');
-        const db = mongoose.connection.db;
-        const bucket = new GridFSBucket(db, { bucketName: "media" });
+    if (!file || !file.filepath) {
+      return res.status(400).send("No file uploaded or file path missing");
+    }
 
-        // Debugging log
-        console.log('File received:', file);
+    // Replace spaces with hyphens in the file name
+    const fileName = file.originalFilename.replace(/ /g, '-');
+    const db = mongoose.connection.db;
+    const bucket = new GridFSBucket(db, { bucketName: "media" });
 
-        try {
-            const uploadStream = bucket.openUploadStream(fileName); // Use modified file name
-            const readStream = fs.createReadStream(file.filepath);
+    try {
+      const uploadStream = bucket.openUploadStream(fileName); // Use modified file name
+      const readStream = fs.createReadStream(file.filepath);
 
-            readStream.pipe(uploadStream)
-                .on('error', err => {
-                    console.error('Upload error:', err);
-                    res.status(500).send("Upload error");
-                })
-                .on('finish', async () => {
-                    const media = new Media({
-                        filename: fileName,  // Store the modified file name
-                        fileId: uploadStream.id,
-                        uploadedBy: acc.Identity
-                    });
-                    await media.save();
-                    return res.redirect("/render-img");
-                });
-        } catch (err) {
-            console.error('Error during file upload:', err);
-            res.status(500).send("Internal server error");
-        }
-    });
+      readStream.pipe(uploadStream)
+        .on('error', err => {
+          console.error('Upload error:', err);
+          res.status(500).send("Upload error");
+        })
+        .on('finish', async () => {
+          const media = new Media({
+            filename: fileName,  // Store the modified file name
+            fileId: uploadStream.id,
+            uploadedBy: acc.Identity
+          });
+          await media.save();
+          return res.redirect("/render-img");
+        });
+    } catch (err) {
+      console.error('Error during file upload:', err);
+      res.status(500).send("Internal server error");
+    }
+  });
 };
 
 const RenderImages = async (req, res) => {
-    const images = await Media.find().sort({ createdAt: -1 });
-    const files = images.map(file => ({
-        url: `/media/${file.fileId}`,
-        filename: file.filename
-    }));
+  const images = await Media.find().sort({ createdAt: -1 });
+  const files = images.map(file => ({
+    url: `/media/${file.fileId}`,
+    filename: file.filename
+  }));
 
-    res.render("Blog", { mediaFiles: files });
+  res.render("Blog", { mediaFiles: files });
 };
 
 const ServeImage = async (req, res) => {
-    const db = mongoose.connection.db;
-    const bucket = new GridFSBucket(db, { bucketName: 'media' });
-    const downloadStream = bucket.openDownloadStream(new mongoose.Types.ObjectId(req.params.id));
-    downloadStream.pipe(res);
+  const db = mongoose.connection.db;
+  const bucket = new GridFSBucket(db, { bucketName: 'media' });
+  const downloadStream = bucket.openDownloadStream(new mongoose.Types.ObjectId(req.params.id));
+  downloadStream.pipe(res);
 };
 
 // * exporting functions 
