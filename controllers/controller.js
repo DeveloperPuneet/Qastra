@@ -673,7 +673,7 @@ const UploadMedia = async (req, res) => {
 
     const file = files.file;
     if (!file || !file.filepath) {
-      return res.status(400).send("No file uploaded or file path missing");
+      return res.status(400).send(file);
     }
 
     // Replace spaces with hyphens in the file name
