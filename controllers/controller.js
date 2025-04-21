@@ -653,7 +653,6 @@ const { GridFSBucket } = require('mongodb');
 const Media = require('../models/Media');
 const formidable = require('formidable');
 const fs = require('fs');
-const mongoose = require('mongoose'); // Ensure mongoose is imported if needed
 
 const UploadPage = async (req, res) => {
   const acc = await Accounts.findOne({ Identity: req.session.user });
