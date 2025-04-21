@@ -655,7 +655,7 @@ const fs = require('fs');
 
 const UploadPage = async (req, res) => {
   const acc = await Accounts.findOne({ Identity: req.session.user });
-  if (acc && acc.admin) {
+  if (acc && acc.admin == true) {
     return res.render("Upload");
   } else {
     return res.status(403).send("Access Denied ❌");

@@ -31,6 +31,10 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    admin:{
+        type: Boolean,
+        default: false
     }
 });
 
