@@ -10,26 +10,3 @@ html(lang="en")
     form(action="/upload" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; align-items: center; gap: 1em;")
       input(type="file" name="file" required style="background: #2d0a49; padding: 10px; border-radius: 6px; color: white;")
       button(type="submit" style="background: #aa00ff; border: none; padding: 10px 20px; color: white; border-radius: 5px; cursor: pointer;") Upload
-
-
-// STEP 5: views/Blog.pug (styled like Guidelines)
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet", href="/css/Guidelines.css")
-    title Qastra Blog
-  body
-    include ./PreLoader.pug
-    .background
-      img(src="/media/interface-background-3.jpeg", alt="")
-      .shade
-    .mains
-      h1 Qastra
-      h4 One Question Closer to Clarity
-      h1 Blog
-    .blog-gallery(style="display: flex; flex-wrap: wrap; gap: 2em; justify-content: center; padding: 2em;")
-      each file in mediaFiles
-        .img-box(style="background: #2d0a49; padding: 1em; border-radius: 8px;")
-          img(src=`${file.url}` style="max-width: 300px; border-radius: 6px;")
