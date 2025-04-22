@@ -192,10 +192,10 @@ body {
     width: 800px;
     border-radius: 10px;
     min-height: 100px;
-    word-wrap: break-word;        
-    overflow-wrap: break-word;    
-    white-space: pre-wrap;         
-    max-width: 100%;              
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
     box-sizing: border-box;
 }
 
@@ -218,7 +218,7 @@ body {
     margin-bottom: 30px;
 }
 
-.btns a:nth-child(1){
+.btns a:nth-child(1) {
     text-decoration: none;
     color: #fff;
     background: var(--cosmic-indigo);
@@ -226,10 +226,20 @@ body {
     border-radius: 50px;
 }
 
-.btns a:nth-child(2){
+.btns a:nth-child(2) {
     text-decoration: none;
     color: #fff;
     background: var(--plasma-pink);
     padding: 8px 40px;
     border-radius: 50px;
+}
+
+.ads {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* h */
 }
