@@ -3,10 +3,31 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet", href="/css/Signin.css")
+    
+    // SEO Meta – lighter because it’s a signin page
+    meta(name="description", content="Sign in to your Qastra account to explore topics, ask questions, and join the discussion.")
+    meta(name="robots", content="index, follow")  // Signin pages shouldn't be indexed
+    meta(name="author", content="Qastra Team")
+
+    // Open Graph (Optional for login page, but still good for brand presence)
+    meta(property="og:title", content="Sign in – Qastra")
+    meta(property="og:description", content="Welcome back! Sign in to your Qastra account to connect with the community.")
+    meta(property="og:image", content="https://qastra.onrender.com/media/Qastra.jpeg")
+    meta(property="og:url", content="https://qastra.onrender.com/signin")
+    meta(property="og:type", content="website")
+
+    // Twitter Card
+    meta(name="twitter:card", content="summary")
+    meta(name="twitter:title", content="Sign in – Qastra")
+    meta(name="twitter:description", content="Welcome back! Sign in to your Qastra account to connect with the community.")
+    meta(name="twitter:image", content="https://qastra.onrender.com/media/Qastra.jpeg")
+
+    // Icons and Title
     link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
     title Qastra: Signin
 
+    // CSS
+    link(rel="stylesheet", href="/css/Signin.css")
   body
     include ./PreLoader.pug
     .background

@@ -3,9 +3,32 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet", href="/css/AskedQuestion.css")
+    
+    // SEO Meta
+    meta(name="description", content=#{ques.Topic})
+    meta(name="keywords", content="Qastra, questions, answers, community, knowledge, forum, topics")
+    meta(name="author", content="Qastra Team")
+    meta(name="robots", content="index, follow")
+
+    // Open Graph (Facebook, LinkedIn)
+    meta(property="og:title", content="Qastra – Share and Explore Questions")
+    meta(property="og:description", content="Join Qastra to ask meaningful questions and engage with a growing knowledge community.")
+    meta(property="og:image", content="https://qastra.onrender.com/media/Qastra.jpeg")  // Use full URL
+    meta(property="og:url", content="https://qastra.onrender.com")  // Update if specific page URL is better
+    meta(property="og:type", content="website")
+
+    // Twitter Card
+    meta(name="twitter:card", content="summary_large_image")
+    meta(name="twitter:title", content="Qastra – Share and Explore Questions")
+    meta(name="twitter:description", content="Join Qastra to ask meaningful questions and engage with a growing knowledge community.")
+    meta(name="twitter:image", content="https://qastra.onrender.com/media/Qastra.jpeg")
+
+    // Icons and Title
     link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
     title Qastra
+
+    // CSS
+    link(rel="stylesheet", href="/css/AskedQuestion.css")
   body
     include ./PreLoader.pug
     .background
