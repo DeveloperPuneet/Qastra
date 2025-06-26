@@ -21,7 +21,7 @@ Think: Stack Overflow + Reddit + a touch of existential crisis
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Pug (HTML templating), TailwindCSS
+- **Frontend**: Pug (HTML templating),
 - **Backend**: Node.js, Express
 - **Database**: MongoDB
 - **Auth**: Sessions or Identity docs (custom logic)
