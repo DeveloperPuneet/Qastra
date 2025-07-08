@@ -33,7 +33,71 @@ const VerificationMail = async (name, email, id) => {
             from: config.email,
             to: email,
             subject: 'Qastra Verification Mail',
-            html: `Hi ${name},<br>Your verification code is ${id}`
+            html: `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Qastra Verification</title>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+      <style>
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Poppins', sans-serif;
+          background-color: #121212;
+          color: #e0e0e0;
+        }
+        .container {
+          width: 99%;
+          max-width: 900px;
+          margin: 40px auto;
+          background-color: #1f1f1f;
+          border-radius: 12px;
+          padding: 30px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+          color: #ffffff;
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+        p {
+          line-height: 1.6;
+          font-size: 16px;
+          color: #cccccc;
+        }
+        .code {
+          display: inline-block;
+          background-color: #2a2a2a;
+          padding: 12px 20px;
+          border-radius: 8px;
+          font-size: 20px;
+          font-weight: bold;
+          color: #00e676;
+          margin: 20px 0;
+          letter-spacing: 2px;
+        }
+        .footer {
+          margin-top: 30px;
+          font-size: 14px;
+          color: #777;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Welcome to Qastra, ${name}!</h1>
+        <p>You're just one step away from getting started 🚀</p>
+        <p>To verify your account, please use the following verification code:</p>
+        <div class="code">${id}</div>
+        <p>If you did not request this verification, please ignore this email or contact our support team.</p>
+        <p>Thank you for joining Qastra – the future of learning, simplified.</p>
+        <div class="footer">
+          © 2025 Qastra Inc. All rights reserved.
+        </div>
+      </div>
+    </body>
+    </html>`
         }
         transports.sendMail(mailOption, (error, info) => {
             if (error) {
@@ -65,7 +129,86 @@ const ResetPasswordMail = async (name, email, id) => {
             from: config.email,
             to: email,
             subject: 'Qastra Reset Password code',
-            html: `Hi ${name},<br>Your Reset Password code is ${id}`
+            html: `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Reset Your Qastra Password</title>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+      <style>
+        * {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Poppins', sans-serif;
+          background-color: #121212;
+          color: #e0e0e0;
+        }
+        .container {
+          width: 99%;
+          max-width: 900px;
+          margin: 40px auto;
+          background-color: #1f1f1f;
+          border-radius: 12px;
+          padding: 30px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+          color: #ffffff;
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+        p {
+          line-height: 1.6;
+          font-size: 16px;
+          color: #cccccc;
+        }
+        .code {
+          display: inline-block;
+          background-color: #2a2a2a;
+          padding: 12px 20px;
+          border-radius: 8px;
+          font-size: 20px;
+          font-weight: bold;
+          color: #ff5252;
+          margin: 20px 0;
+          letter-spacing: 2px;
+          text-shadow: 0 0 6px #ff5252;
+        }
+        .btn {
+          display: inline-block;
+          background-color: #ff5252;
+          color: #000;
+          padding: 10px 20px;
+          border-radius: 6px;
+          text-decoration: none;
+          font-weight: bold;
+          margin: 20px 0;
+        }
+        .footer {
+          margin-top: 30px;
+          font-size: 14px;
+          color: #777;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Password Reset Request</h1>
+        <p>Hi ${name},</p>
+        <p>We received a request to reset your Qastra account password. If this was you, use the following code to proceed:</p>
+        <div class="code">${id}</div>
+        <p>If you did not request this, please ignore this email. Your account is safe. 🙌</p>
+        <p>If you need help, feel free to reach out to our support team anytime.</p>
+        <div class="footer">
+          © 2025 Qastra Inc. All rights reserved.
+        </div>
+      </div>
+    </body>
+    </html>`
         }
         transports.sendMail(mailOption, (error, info) => {
             if (error) {
@@ -655,74 +798,74 @@ const formidable = require('formidable');
 const fs = require('fs');
 
 const UploadPage = async (req, res) => {
-  const acc = await Accounts.findOne({ Identity: req.session.user });
-  if (acc && acc.admin == true) {
-    return res.render("Upload");
-  } else {
-    return res.status(403).send("Access Denied ❌");
-  }
+    const acc = await Accounts.findOne({ Identity: req.session.user });
+    if (acc && acc.admin == true) {
+        return res.render("Upload");
+    } else {
+        return res.status(403).send("Access Denied ❌");
+    }
 };
 
 const UploadMedia = async (req, res) => {
-  const acc = await Accounts.findOne({ Identity: req.session.user });
-  if (!acc || !acc.admin) return res.status(403).send("Forbidden");
+    const acc = await Accounts.findOne({ Identity: req.session.user });
+    if (!acc || !acc.admin) return res.status(403).send("Forbidden");
 
-  const form = new formidable.IncomingForm({ multiples: false });
-  form.parse(req, async (err, fields, files) => {
-    if (err) return res.status(500).send("Form parse error");
+    const form = new formidable.IncomingForm({ multiples: false });
+    form.parse(req, async (err, fields, files) => {
+        if (err) return res.status(500).send("Form parse error");
 
-    // Ensure files.file is an array or a single object
-    const file = Array.isArray(files.file) ? files.file[0] : files.file;
+        // Ensure files.file is an array or a single object
+        const file = Array.isArray(files.file) ? files.file[0] : files.file;
 
-    if (!file || !file.filepath) {
-      return res.status(400).send("No file uploaded or file path missing");
-    }
+        if (!file || !file.filepath) {
+            return res.status(400).send("No file uploaded or file path missing");
+        }
 
-    // Replace spaces with hyphens in the file name
-    const fileName = file.originalFilename.replace(/ /g, '-');
-    const db = mongoose.connection.db;
-    const bucket = new GridFSBucket(db, { bucketName: "media" });
+        // Replace spaces with hyphens in the file name
+        const fileName = file.originalFilename.replace(/ /g, '-');
+        const db = mongoose.connection.db;
+        const bucket = new GridFSBucket(db, { bucketName: "media" });
 
-    try {
-      const uploadStream = bucket.openUploadStream(fileName); // Use modified file name
-      const readStream = fs.createReadStream(file.filepath);
+        try {
+            const uploadStream = bucket.openUploadStream(fileName); // Use modified file name
+            const readStream = fs.createReadStream(file.filepath);
 
-      readStream.pipe(uploadStream)
-        .on('error', err => {
-          console.error('Upload error:', err);
-          res.status(500).send("Upload error");
-        })
-        .on('finish', async () => {
-          const media = new Media({
-            filename: fileName,  // Store the modified file name
-            fileId: uploadStream.id,
-            uploadedBy: acc.Identity
-          });
-          await media.save();
-          return res.redirect("/render-img");
-        });
-    } catch (err) {
-      console.error('Error during file upload:', err);
-      res.status(500).send("Internal server error");
-    }
-  });
+            readStream.pipe(uploadStream)
+                .on('error', err => {
+                    console.error('Upload error:', err);
+                    res.status(500).send("Upload error");
+                })
+                .on('finish', async () => {
+                    const media = new Media({
+                        filename: fileName,  // Store the modified file name
+                        fileId: uploadStream.id,
+                        uploadedBy: acc.Identity
+                    });
+                    await media.save();
+                    return res.redirect("/render-img");
+                });
+        } catch (err) {
+            console.error('Error during file upload:', err);
+            res.status(500).send("Internal server error");
+        }
+    });
 };
 
 const RenderImages = async (req, res) => {
-  const images = await Media.find().sort({ createdAt: -1 });
-  const files = images.map(file => ({
-    url: `/media/${file.fileId}`,
-    filename: file.filename
-  }));
+    const images = await Media.find().sort({ createdAt: -1 });
+    const files = images.map(file => ({
+        url: `/media/${file.fileId}`,
+        filename: file.filename
+    }));
 
-  res.render("Blog", { mediaFiles: files });
+    res.render("Blog", { mediaFiles: files });
 };
 
 const ServeImage = async (req, res) => {
-  const db = mongoose.connection.db;
-  const bucket = new GridFSBucket(db, { bucketName: 'media' });
-  const downloadStream = bucket.openDownloadStream(new mongoose.Types.ObjectId(req.params.id));
-  downloadStream.pipe(res);
+    const db = mongoose.connection.db;
+    const bucket = new GridFSBucket(db, { bucketName: 'media' });
+    const downloadStream = bucket.openDownloadStream(new mongoose.Types.ObjectId(req.params.id));
+    downloadStream.pipe(res);
 };
 
 // * exporting functions 
