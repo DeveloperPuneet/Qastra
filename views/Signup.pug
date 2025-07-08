@@ -11,7 +11,7 @@ html(lang="en")
 
     // Open Graph (Optional for login page, but still good for brand presence)
     meta(property="og:title", content="Sign in – Qastra")
-    meta(property="og:description", content="Welcome back! Sign in to your Qastra account to connect with the community.")
+    meta(property="og:description", content="Welcome! Sign up and create Qastra account to connect with the community.")
     meta(property="og:image", content="https://qastra.onrender.com/media/Qastra.jpeg")
     meta(property="og:url", content="https://qastra.onrender.com/signin")
     meta(property="og:type", content="website")
@@ -24,10 +24,10 @@ html(lang="en")
 
     // Icons and Title
     link(rel="shortcut icon", href="/media/Qastra.jpeg", type="image/x-icon")
-    title Qastra: Signin
+    title Qastra: Signup
 
     // CSS
-    link(rel="stylesheet", href="/css/Signin.css")
+    link(rel="stylesheet", href="/css/Signup.css")
     body
         include ./PreLoader.pug
         .background
@@ -76,6 +76,8 @@ html(lang="en")
                     pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$", 
                     title="Password must be at least 8 characters, include 1 number and 1 special character"
                 )
+                if message
+                    .message #{message}
                 p Already have an Account? 
                     a(href="/signin") Sign in
                 input(type="submit", value="Create Account")

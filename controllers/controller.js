@@ -149,7 +149,7 @@ const ResetPasswordMail = async (name, email, id) => {
         }
         .container {
           width: 99%;
-          max-width: 900px;
+          max-width: 1200px;
           margin: 40px auto;
           background-color: #1f1f1f;
           border-radius: 12px;
@@ -238,9 +238,87 @@ const ReportMail = async (email, QID) => {
 
         const mailOption = {
             from: config.email,
-            to: config.email,
+            to: email,
             subject: 'Qastra Report Mail',
-            html: `Hi Admin, the reported QID is ${QID}`
+            html: `<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Reset Your Qastra Password</title>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+      <style>
+        * {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Poppins', sans-serif;
+          background-color: #121212;
+          color: #e0e0e0;
+        }
+        .container {
+          width: 99%;
+          max-width: 1200px;
+          margin: 40px auto;
+          background-color: #1f1f1f;
+          border-radius: 12px;
+          padding: 30px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+          color: #ffffff;
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+        p {
+          line-height: 1.6;
+          font-size: 16px;
+          color: #cccccc;
+        }
+        .code {
+          display: inline-block;
+          background-color: #2a2a2a;
+          padding: 12px 20px;
+          border-radius: 8px;
+          font-size: 20px;
+          font-weight: bold;
+          color: #ff5252;
+          margin: 20px 0;
+          letter-spacing: 2px;
+          text-shadow: 0 0 6px #ff5252;
+        }
+        .btn {
+          display: inline-block;
+          background-color: #ff5252;
+          color: #000;
+          padding: 10px 20px;
+          border-radius: 6px;
+          text-decoration: none;
+          font-weight: bold;
+          margin: 20px 0;
+        }
+        .footer {
+          margin-top: 30px;
+          font-size: 14px;
+          color: #777;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Password Reset Request</h1>
+        <p>Hi Admin,</p>
+        <p>Some user of Qastra are reporting the Question whose QID is given below, Check it out and take the action if required:</p>
+        <div class="code">${QID}</div>
+        <p>Thank you Admin 🙌</p>
+        <p>If you need help, feel free to reach out to our support team anytime.</p>
+        <div class="footer">
+          © 2025 Qastra Inc. All rights reserved.
+        </div>
+      </div>
+    </body>
+    </html>`
         }
         transports.sendMail(mailOption, (error, info) => {
             if (error) {
@@ -299,6 +377,12 @@ const Signup = async (req, res) => {
     try {
         const { name, username, email, password } = req.body;
         let id = GenerateRandomString(20);
+        if(email){
+            let v1 = await Accounts.find({email})
+            if(v1){
+                return res.render("Signup", { message: "Error while creating Account" })
+            }
+        }
         let enc = await EncryptPassword(password);
         if (!enc) {
             return res.render("Signup", { message: "Error while creating Account" });

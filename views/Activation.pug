@@ -17,5 +17,7 @@ html(lang="en")
       form(action="/activation", method="post")
         input(type="text", placeholder="Verification Code" name="code")
         input(type="submit", value="Activate Account")
+        if message
+          .message #{message}
     script(src="/js/Activation.js")
     include ./footer.pug

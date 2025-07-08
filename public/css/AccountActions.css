@@ -108,3 +108,12 @@ body {
 .options a:nth-child(2){
     background-color: var(--cosmic-indigo);
 }
+
+.message {
+    color: var(--plasma-pink);
+    background: var(--cosmic-indigo);
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 8px;
+}

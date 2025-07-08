@@ -19,6 +19,8 @@ html(lang="en")
       form(action="/ask-a-question", method="post")
         input(type="text", placeholder="Topic", required, autofocus, maxlength="60" name="topic")
         input(type="text", placeholder="Question", maxlength="150", name="question")
+        if message
+          .message #{message}
         input(type="submit", value="Ask Question")
   include ./footer.pug
   script(src="/js/Question.js")

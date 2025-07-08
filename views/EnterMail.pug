@@ -16,6 +16,8 @@ html(lang="en")
       h4 Enter email to reset Password
       form(action="/enter-email", method="post")
         input(type="email", placeholder="abc.xyz@mn.com", required, autocomplete="off", spellcheck="false", autofocus name="email")
+        if message
+          .message #{message}
         input(type="submit", value="Send Reset Code")
     script(src="/js/Signin.js")
   include ./footer.pug

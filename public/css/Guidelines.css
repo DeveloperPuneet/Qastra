@@ -174,3 +174,12 @@ body {
 .box p{
     margin-top: 10px;
 }
+
+.message {
+    color: var(--plasma-pink);
+    background: var(--cosmic-indigo);
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 8px;
+}

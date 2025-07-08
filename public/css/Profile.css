@@ -104,3 +104,12 @@ form input {
     width: 800px;
     color: #fff;
 }
+
+.message {
+    color: var(--plasma-pink);
+    background: var(--cosmic-indigo);
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 8px;
+}

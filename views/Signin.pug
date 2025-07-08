@@ -43,6 +43,8 @@ html(lang="en")
         .log-options
           a(href="/signup") Signup
           a(href="/enter-email") Forgot Password
+        if message
+          .message #{message}
         input(type="submit", value="Sign In Account")
   include ./footer.pug
   script(src="/js/Signin.js")
