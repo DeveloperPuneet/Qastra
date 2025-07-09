@@ -377,9 +377,9 @@ const Signup = async (req, res) => {
     try {
         const { name, username, email, password } = req.body;
         let id = GenerateRandomString(20);
-        if(email){
-            let v1 = await Accounts.find({email})
-            if(v1){
+        if (email) {
+            let v1 = await Accounts.find({ email })
+            if (v1) {
                 return res.render("Signup", { message: "Error while creating Account" })
             }
         }
@@ -485,10 +485,9 @@ const dashboardLoad = async (req, res) => {
             return res.json(ques);
         }
 
-        const notifications = await Notifications.find({ for: id });
-        const unreadExists = notifications.some(n => n.Read === false);
-
-        return res.render("Dashboard", { acc, ques, unreadExists });
+        const notifications = await Notifications.find({ NotifyTo: id });
+        const notificationMark = notifications.some(n => n.Read === false);
+        return res.render("Dashboard", { acc, ques, notificationMark });
     } catch (error) {
         console.log(error);
     }
@@ -727,7 +726,10 @@ const Notification = async (req, res) => {
     try {
         let id = req.session.user;
         let notifications = await Notifications.find({ NotifyTo: id }).sort({ Date: -1 });
-        return res.render("Notifications", { notifications });
+        let update = await Notifications.updateMany({ NotifyTo: id }, { $set: { Read: true } });
+        if (update) {
+            return res.render("Notifications", { notifications });
+        }
     } catch (error) {
         console.log(error);
     }

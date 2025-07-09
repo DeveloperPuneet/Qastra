@@ -19,8 +19,12 @@ html(lang="en")
       .options
         a(href="/settings")
           i.fa-solid.fa-gear
-        a(href="/notification", style=`margin-left: 20px;${unreadExists ? 'border-bottom: 1px solid red;' : ''}`)
-          i.fa-solid.fa-bell
+        if notificationMark == true
+          a(href="/notification", style=`margin-left: 20px; border-bottom: 1px solid red`)
+            i.fa-solid.fa-bell
+        else
+          a(href="/notification", style=`margin-left: 20px;`)
+            i.fa-solid.fa-bell
     //- random shapes
     .random-shape-1
       img(src="/media/interface-stars.png", alt="")
