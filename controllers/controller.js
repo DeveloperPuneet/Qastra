@@ -34,70 +34,149 @@ const VerificationMail = async (name, email, id) => {
             to: email,
             subject: 'Qastra Verification Mail',
             html: `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Qastra Verification</title>
-      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-      <style>
-        body {
-          margin: 0;
-          padding: 0;
-          font-family: 'Poppins', sans-serif;
-          background-color: #121212;
-          color: #e0e0e0;
-        }
-        .container {
-          width: 99%;
-          max-width: 900px;
-          margin: 40px auto;
-          background-color: #1f1f1f;
-          border-radius: 12px;
-          padding: 30px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-        h1 {
-          color: #ffffff;
-          font-size: 24px;
-          margin-bottom: 10px;
-        }
-        p {
-          line-height: 1.6;
-          font-size: 16px;
-          color: #cccccc;
-        }
-        .code {
-          display: inline-block;
-          background-color: #2a2a2a;
-          padding: 12px 20px;
-          border-radius: 8px;
-          font-size: 20px;
-          font-weight: bold;
-          color: #00e676;
-          margin: 20px 0;
-          letter-spacing: 2px;
-        }
-        .footer {
-          margin-top: 30px;
-          font-size: 14px;
-          color: #777;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>Welcome to Qastra, ${name}!</h1>
-        <p>You're just one step away from getting started 🚀</p>
-        <p>To verify your account, please use the following verification code:</p>
-        <div class="code">${id}</div>
-        <p>If you did not request this verification, please ignore this email or contact our support team.</p>
-        <p>Thank you for joining Qastra – the future of learning, simplified.</p>
-        <div class="footer">
-          © 2025 Qastra Inc. All rights reserved.
-        </div>
-      </div>
-    </body>
-    </html>`
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Qastra Verification</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #1e1e1e, #0a0a0a);
+      color: #e0e0e0;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+
+    /* Sparkle Particles */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(#ffffff15 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.05;
+      z-index: 0;
+    }
+
+    .blob {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.12;
+      filter: blur(10px);
+    }
+
+    .blob1 {
+      top: -100px;
+      left: -100px;
+      transform: rotate(25deg);
+    }
+
+    .blob2 {
+      bottom: -120px;
+      right: -80px;
+      transform: rotate(-35deg);
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 92%;
+      max-width: 720px;
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 26px;
+      padding: 50px 40px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 30px rgba(0, 255, 200, 0.1), inset 0 0 25px rgba(255,255,255,0.03);
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 24px;
+      background: linear-gradient(90deg, #ffd700, #fff6aa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #cccccc;
+      text-align: center;
+      margin: 18px 0;
+    }
+
+    .aura {
+      margin: 40px auto;
+      padding: 20px 35px;
+      font-size: 26px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 20px;
+      background: radial-gradient(circle at center, #1f1f1f, #121212);
+      color: #00ff99;
+      box-shadow:
+        0 0 25px #00ff9970,
+        0 0 10px #00ffaa40 inset,
+        0 0 4px #00ff9970 inset;
+      letter-spacing: 4px;
+    }
+
+    .footer {
+      margin-top: 60px;
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #333;
+      padding-top: 16px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      .aura {
+        font-size: 22px;
+        padding: 16px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 🌀 Blobs -->
+  <svg class="blob blob1" width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(300,300)">
+      <path d="M120,-155.2C161.7,-122.2,202.4,-81.6,215.1,-34.4C227.9,12.9,212.7,66.5,182.3,110.4C151.9,154.2,106.3,188.3,56.9,199.5C7.5,210.7,-46,199.1,-91.4,172.6C-136.7,146,-173.9,104.5,-183.8,58.5C-193.6,12.6,-176.1,-38.9,-145.8,-86.7C-115.5,-134.5,-72.3,-178.6,-21.1,-188.3C30.1,-198,80.2,-173.2,120,-155.2Z" fill="#00ffc8"/>
+    </g>
+  </svg>
+
+  <svg class="blob blob2" width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(300,300)">
+      <path d="M112.6,-137.6C147.4,-105.1,178.3,-73.7,189.9,-35.4C201.5,2.8,193.8,47.9,173.5,91.5C153.3,135.1,120.5,177.1,79.7,191.4C38.9,205.7,-10,192.2,-51.4,167.1C-92.8,142,-126.7,105.3,-150.5,60.6C-174.3,15.9,-187.9,-36.7,-169.1,-82.2C-150.4,-127.7,-99.3,-165.9,-47,-178.2C5.3,-190.5,58.8,-176.1,112.6,-137.6Z" fill="#00bcd4"/>
+    </g>
+  </svg>
+
+  <!-- 💠 Main Card -->
+  <div class="container">
+    <h1>🌟 Welcome to Qastra, ${name}!</h1>
+    <p>You’ve just unlocked the gates to something legendary. Use the code below to verify your account and begin your journey with us. This step confirms your identity and secures your space in our universe.</p>
+    <div class="aura">${id}</div>
+    <p>If this wasn’t you, you can safely ignore this message. Otherwise — destiny awaits ⚡</p>
+    <p>Qastra – Crafted to awaken minds. Engineered for excellence.</p>
+    <div class="footer">
+      © 2025 Qastra Inc. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>
+`
         }
         transports.sendMail(mailOption, (error, info) => {
             if (error) {
@@ -130,85 +209,150 @@ const ResetPasswordMail = async (name, email, id) => {
             to: email,
             subject: 'Qastra Reset Password code',
             html: `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Reset Your Qastra Password</title>
-      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-      <style>
-        * {
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
-        body {
-          margin: 0;
-          padding: 0;
-          font-family: 'Poppins', sans-serif;
-          background-color: #121212;
-          color: #e0e0e0;
-        }
-        .container {
-          width: 99%;
-          max-width: 1200px;
-          margin: 40px auto;
-          background-color: #1f1f1f;
-          border-radius: 12px;
-          padding: 30px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-        h1 {
-          color: #ffffff;
-          font-size: 24px;
-          margin-bottom: 10px;
-        }
-        p {
-          line-height: 1.6;
-          font-size: 16px;
-          color: #cccccc;
-        }
-        .code {
-          display: inline-block;
-          background-color: #2a2a2a;
-          padding: 12px 20px;
-          border-radius: 8px;
-          font-size: 20px;
-          font-weight: bold;
-          color: #ff5252;
-          margin: 20px 0;
-          letter-spacing: 2px;
-          text-shadow: 0 0 6px #ff5252;
-        }
-        .btn {
-          display: inline-block;
-          background-color: #ff5252;
-          color: #000;
-          padding: 10px 20px;
-          border-radius: 6px;
-          text-decoration: none;
-          font-weight: bold;
-          margin: 20px 0;
-        }
-        .footer {
-          margin-top: 30px;
-          font-size: 14px;
-          color: #777;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>Password Reset Request</h1>
-        <p>Hi ${name},</p>
-        <p>We received a request to reset your Qastra account password. If this was you, use the following code to proceed:</p>
-        <div class="code">${id}</div>
-        <p>If you did not request this, please ignore this email. Your account is safe. 🙌</p>
-        <p>If you need help, feel free to reach out to our support team anytime.</p>
-        <div class="footer">
-          © 2025 Qastra Inc. All rights reserved.
-        </div>
-      </div>
-    </body>
-    </html>`
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reset Your Qastra Password</title>
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #1e1e1e, #0a0a0a);
+      color: #e0e0e0;
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(#ffffff15 1px, transparent 1px);
+      background-size: 22px 22px;
+      opacity: 0.03;
+      z-index: 0;
+    }
+
+    .blob {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.1;
+      filter: blur(12px);
+    }
+
+    .blob1 {
+      top: -120px;
+      left: -90px;
+      transform: rotate(30deg);
+    }
+
+    .blob2 {
+      bottom: -100px;
+      right: -120px;
+      transform: rotate(-35deg);
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 92%;
+      max-width: 720px;
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 50px 40px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 20px rgba(255, 80, 80, 0.08), inset 0 0 15px rgba(255,255,255,0.03);
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #ff5f5f, #ffaaaa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #cccccc;
+      text-align: center;
+      margin: 18px 0;
+    }
+
+    .code {
+      display: inline-block;
+      background: #1a1a1a;
+      padding: 20px 38px;
+      border-radius: 14px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4d4d;
+      letter-spacing: 4px;
+      text-shadow: 0 0 10px #ff4d4daa, 0 0 4px #ff000050;
+      box-shadow: 0 0 22px #ff4d4d40, inset 0 0 10px #ff4d4d30;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    .footer {
+      margin-top: 60px;
+      font-size: 13px;
+      color: #777;
+      text-align: center;
+      border-top: 1px solid #333;
+      padding-top: 16px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      .code {
+        font-size: 20px;
+        padding: 16px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 🔮 Background Blobs -->
+  <svg class="blob blob1" width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(300,300)">
+      <path d="M120,-155.2C161.7,-122.2,202.4,-81.6,215.1,-34.4C227.9,12.9,212.7,66.5,182.3,110.4C151.9,154.2,106.3,188.3,56.9,199.5C7.5,210.7,-46,199.1,-91.4,172.6C-136.7,146,-173.9,104.5,-183.8,58.5C-193.6,12.6,-176.1,-38.9,-145.8,-86.7C-115.5,-134.5,-72.3,-178.6,-21.1,-188.3C30.1,-198,80.2,-173.2,120,-155.2Z" fill="#ff5252"/>
+    </g>
+  </svg>
+  <svg class="blob blob2" width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(300,300)">
+      <path d="M112.6,-137.6C147.4,-105.1,178.3,-73.7,189.9,-35.4C201.5,2.8,193.8,47.9,173.5,91.5C153.3,135.1,120.5,177.1,79.7,191.4C38.9,205.7,-10,192.2,-51.4,167.1C-92.8,142,-126.7,105.3,-150.5,60.6C-174.3,15.9,-187.9,-36.7,-169.1,-82.2C-150.4,-127.7,-99.3,-165.9,-47,-178.2C5.3,-190.5,58.8,-176.1,112.6,-137.6Z" fill="#ff7272"/>
+    </g>
+  </svg>
+
+  <!-- 🧊 Frosted Card -->
+  <div class="container">
+    <h1>Password Reset Request</h1>
+    <p>Hey ${name},</p>
+    <p>Someone (hopefully you 👀) requested to reset the password for your Qastra account. If that’s you, use this special code to verify:</p>
+    <div class="code">${id}</div>
+    <p>If this wasn’t you, just ignore this email — your account is safe and untouched.</p>
+    <p>Stay secure. Stay curious. Stay legendary. 🔐</p>
+    <div class="footer">
+      © 2025 Qastra Inc. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>`
         }
         transports.sendMail(mailOption, (error, info) => {
             if (error) {
@@ -240,85 +384,155 @@ const ReportMail = async (email, QID) => {
             from: config.email,
             to: email,
             subject: 'Qastra Report Mail',
-            html: `<html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Reset Your Qastra Password</title>
-      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-      <style>
-        * {
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
-        body {
-          margin: 0;
-          padding: 0;
-          font-family: 'Poppins', sans-serif;
-          background-color: #121212;
-          color: #e0e0e0;
-        }
-        .container {
-          width: 99%;
-          max-width: 1200px;
-          margin: 40px auto;
-          background-color: #1f1f1f;
-          border-radius: 12px;
-          padding: 30px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-        h1 {
-          color: #ffffff;
-          font-size: 24px;
-          margin-bottom: 10px;
-        }
-        p {
-          line-height: 1.6;
-          font-size: 16px;
-          color: #cccccc;
-        }
-        .code {
-          display: inline-block;
-          background-color: #2a2a2a;
-          padding: 12px 20px;
-          border-radius: 8px;
-          font-size: 20px;
-          font-weight: bold;
-          color: #ff5252;
-          margin: 20px 0;
-          letter-spacing: 2px;
-          text-shadow: 0 0 6px #ff5252;
-        }
-        .btn {
-          display: inline-block;
-          background-color: #ff5252;
-          color: #000;
-          padding: 10px 20px;
-          border-radius: 6px;
-          text-decoration: none;
-          font-weight: bold;
-          margin: 20px 0;
-        }
-        .footer {
-          margin-top: 30px;
-          font-size: 14px;
-          color: #777;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>Password Reset Request</h1>
-        <p>Hi Admin,</p>
-        <p>Some user of Qastra are reporting the Question whose QID is given below, Check it out and take the action if required:</p>
-        <div class="code">${QID}</div>
-        <p>Thank you Admin 🙌</p>
-        <p>If you need help, feel free to reach out to our support team anytime.</p>
-        <div class="footer">
-          © 2025 Qastra Inc. All rights reserved.
-        </div>
-      </div>
-    </body>
-    </html>`
+            html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Qastra Report Alert – QID Flagged</title>
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #1a1a1a, #0d0d0d);
+      color: #e0e0e0;
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(#ffffff10 1px, transparent 1px);
+      background-size: 22px 22px;
+      opacity: 0.04;
+      z-index: 0;
+    }
+
+    .blob {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.1;
+      filter: blur(12px);
+    }
+
+    .blob1 {
+      top: -120px;
+      left: -100px;
+      transform: rotate(45deg);
+    }
+
+    .blob2 {
+      bottom: -110px;
+      right: -90px;
+      transform: rotate(-40deg);
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 92%;
+      max-width: 720px;
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 50px 40px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 25px rgba(255, 60, 60, 0.08), inset 0 0 15px rgba(255, 0, 0, 0.04);
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 18px;
+      background: linear-gradient(90deg, #ff4d4d, #ff9999);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #cccccc;
+      text-align: center;
+      margin: 16px 0;
+    }
+
+    .code {
+      display: inline-block;
+      background: #1a1a1a;
+      padding: 20px 38px;
+      border-radius: 14px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4d4d;
+      letter-spacing: 4px;
+      text-shadow: 0 0 10px #ff4d4daa, 0 0 4px #ff000050;
+      box-shadow: 0 0 22px #ff4d4d40, inset 0 0 10px #ff4d4d30;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 13px;
+      color: #777;
+      text-align: center;
+      border-top: 1px solid #333;
+      padding-top: 16px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      .code {
+        font-size: 20px;
+        padding: 16px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔮 Visual Blobs -->
+  <svg class="blob blob1" width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(300,300)">
+      <path d="M120,-155.2C161.7,-122.2,202.4,-81.6,215.1,-34.4C227.9,12.9,212.7,66.5,182.3,110.4C151.9,154.2,106.3,188.3,56.9,199.5C7.5,210.7,-46,199.1,-91.4,172.6C-136.7,146,-173.9,104.5,-183.8,58.5C-193.6,12.6,-176.1,-38.9,-145.8,-86.7C-115.5,-134.5,-72.3,-178.6,-21.1,-188.3C30.1,-198,80.2,-173.2,120,-155.2Z" fill="#ff4d4d"/>
+    </g>
+  </svg>
+
+  <svg class="blob blob2" width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(300,300)">
+      <path d="M112.6,-137.6C147.4,-105.1,178.3,-73.7,189.9,-35.4C201.5,2.8,193.8,47.9,173.5,91.5C153.3,135.1,120.5,177.1,79.7,191.4C38.9,205.7,-10,192.2,-51.4,167.1C-92.8,142,-126.7,105.3,-150.5,60.6C-174.3,15.9,-187.9,-36.7,-169.1,-82.2C-150.4,-127.7,-99.3,-165.9,-47,-178.2C5.3,-190.5,58.8,-176.1,112.6,-137.6Z" fill="#ff8888"/>
+    </g>
+  </svg>
+
+  <!-- 🧊 Alert Card -->
+  <div class="container">
+    <h1>Qastra Report Alert 🚨</h1>
+    <p>Hello Admin,</p>
+    <p>A user has flagged a question on Qastra. The reported QID is shown below.</p>
+    <div class="code">${QID}</div>
+    <p>Please review the question and take any necessary action based on its content or community feedback.</p>
+    <p>This report was generated automatically. If further details are required, visit the admin panel.</p>
+    <div class="footer">
+      © 2025 Qastra Inc. Internal Communication
+    </div>
+  </div>
+</body>
+</html>
+`
         }
         transports.sendMail(mailOption, (error, info) => {
             if (error) {
