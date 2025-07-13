@@ -29,19 +29,19 @@ store.on('error', function (error) {
 const sessionExpiration = 1000 * 60 * 60 * 24 * 30;
 
 // * settings
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(express.static(path.join(__dirname, '../public')));
-router.set('view engine', 'pug');
-router.set('views', path.join(__dirname, '../views'));
+router.use(bodyParser.json()); // Parse JSON bodies 📝
+router.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies 🔗
+router.use(express.static(path.join(__dirname, '../public'))); // Serve static files 📁
+router.set('view engine', 'pug'); // Set view engine to Pug ⚙️
+router.set('views', path.join(__dirname, '../views')); // Set views directory 📍
 
-router.use(session({
-    secret: config.secret,
-    resave: false,
-    saveUninitialized: false,
-    store: store,
-    cookie: { maxAge: sessionExpiration },
-    rolling: true
+router.use(session({ // Configure session middleware 👇
+    secret: config.secret, // Use secret key 🔑
+    resave: false, // Don't resave session 🚫
+    saveUninitialized: false, // Don't save new sessions 🚫
+    store: store, // Use session store 💾
+    cookie: { maxAge: sessionExpiration }, // Set cookie expiration 🍪
+    rolling: true // Reset cookie on activity 🔄
 }));
 
 // * add 'expiresAt' to new sessions

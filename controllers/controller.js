@@ -18,22 +18,22 @@ const Answer = require("../models/Answer");
 // * mailing system 
 const VerificationMail = async (name, email, id) => {
   try {
-    const transports = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: config.email,
-        pass: config.password,
+    const transports = nodemailer.createTransport({ // Create email transport 📧
+      host: 'smtp.gmail.com', // Gmail SMTP host
+      port: 587, // SMTP port
+      secure: false, // Use TLS
+      requireTLS: true, // Require TLS
+      auth: { // Authentication details
+        user: config.email, // Sender email
+        pass: config.password, // Sender password
       },
     });
 
-    const mailOption = {
-      from: config.email,
-      to: email,
-      subject: 'Qastra Verification Mail',
-      html: `
+    const mailOption = { // Email content options
+      from: config.email, // Sender email
+      to: email, // Recipient email
+      subject: 'Qastra Verification Mail', // Email subject
+      html: ` // Email HTML content
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"></head>
@@ -51,33 +51,33 @@ const VerificationMail = async (name, email, id) => {
 </html>`,
     };
 
-    transports.sendMail(mailOption, (error) => {
-      if (error) console.log("Qastra fail code 3");
-      else console.log("Mail sent 🕊");
+    transports.sendMail(mailOption, (error) => { // Send the email
+      if (error) console.log("Qastra fail code 3"); // Log error if any
+      else console.log("Mail sent 🕊"); // Log success message
     });
   } catch (error) {
-    console.log(error.message);
+    console.log(error.message); // Log any errors
   }
 };
 
 const ResetPasswordMail = async (name, email, id) => {
   try {
-    const transports = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: config.email,
-        pass: config.password,
+    const transports = nodemailer.createTransport({ // Create email transport 📧
+      host: 'smtp.gmail.com', // Gmail SMTP host
+      port: 587, // SMTP port
+      secure: false, // Use TLS
+      requireTLS: true, // Require TLS
+      auth: { // Authentication details
+        user: config.email, // Sender email
+        pass: config.password, // Sender password
       },
     });
 
-    const mailOption = {
-      from: config.email,
-      to: email,
-      subject: 'Qastra Reset Password Code',
-      html: `
+    const mailOption = { // Email content options
+      from: config.email, // Sender email
+      to: email, // Recipient email
+      subject: 'Qastra Reset Password Code', // Email subject
+      html: ` // Email HTML content
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"></head>
@@ -96,33 +96,33 @@ const ResetPasswordMail = async (name, email, id) => {
 </html>`,
     };
 
-    transports.sendMail(mailOption, (error) => {
-      if (error) console.log("Qastra fail code 3");
-      else console.log("Mail sent 🕊");
+    transports.sendMail(mailOption, (error) => { // Send the email
+      if (error) console.log("Qastra fail code 3"); // Log error if any
+      else console.log("Mail sent 🕊"); // Log success message
     });
   } catch (error) {
-    console.log(error.message);
+    console.log(error.message); // Log any errors
   }
 };
 
 const ReportMail = async (email, QID) => {
   try {
-    const transports = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: config.email,
-        pass: config.password,
+    const transports = nodemailer.createTransport({ // Create email transport 📧
+      host: 'smtp.gmail.com', // Gmail SMTP host
+      port: 587, // SMTP port
+      secure: false, // Use TLS
+      requireTLS: true, // Require TLS
+      auth: { // Authentication details
+        user: config.email, // Sender email
+        pass: config.password, // Sender password
       },
     });
 
-    const mailOption = {
-      from: config.email,
-      to: email,
-      subject: 'Qastra Report Mail',
-      html: `
+    const mailOption = { // Email content options
+      from: config.email, // Sender email
+      to: email, // Recipient email
+      subject: 'Qastra Report Mail', // Email subject
+      html: ` // Email HTML content
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"></head>
@@ -141,12 +141,12 @@ const ReportMail = async (email, QID) => {
 </html>`,
     };
 
-    transports.sendMail(mailOption, (error) => {
-      if (error) console.log("Qastra fail code 3");
-      else console.log("Mail sent 🕊");
+    transports.sendMail(mailOption, (error) => { // Send the email
+      if (error) console.log("Qastra fail code 3"); // Log error if any
+      else console.log("Mail sent 🕊"); // Log success message
     });
   } catch (error) {
-    console.log(error.message);
+    console.log(error.message); // Log any errors
   }
 };
 
@@ -192,35 +192,35 @@ const SignUpLoad = async (req, res) => {
 
 const Signup = async (req, res) => {
     try {
-        const { name, username, email, password } = req.body;
-        let id = GenerateRandomString(20);
-        if (email) {
-            let v1 = await Accounts.find({ email })
-            if (v1) {
-                return res.render("Signup", { message: "Error while creating Account" })
+        const { name, username, email, password } = req.body; // Destructure request body
+        let id = GenerateRandomString(20); // Generate unique ID
+        if (email) { // Check if email exists
+            let v1 = await Accounts.find({ email }) // Find account by email
+            if (v1) { // If email already exists
+                return res.render("Signup", { message: "Error..." }) // Render signup page 😥
             }
         }
-        let enc = await EncryptPassword(password);
-        if (!enc) {
-            return res.render("Signup", { message: "Error while creating Account" });
+        let enc = await EncryptPassword(password); // Encrypt the password
+        if (!enc) { // Check if encryption failed
+            return res.render("Signup", { message: "Error..." }); // Render signup page again 😥
         } else {
-            let acc = new Accounts({
-                Name: name,
-                Username: username,
-                Email: email,
-                Password: enc,
-                Identity: id
+            let acc = new Accounts({ // Create new account object
+                Name: name, // Set account name
+                Username: username, // Set username
+                Email: email, // Set email address
+                Password: enc, // Set encrypted password
+                Identity: id // Set unique identity
             });
-            let data = await acc.save();
-            if (data) {
-                await VerificationMail(name, email, id);
-                return res.redirect("/activation");
+            let data = await acc.save(); // Save the account
+            if (data) { // Check if account saved
+                await VerificationMail(name, email, id); // Send verification email 📧
+                return res.redirect("/activation"); // Redirect to activation page ➡️
             } else {
-                return res.render("Signup", { message: "Error while creating Account" })
+                return res.render("Signup", { message: "Error..." }) // Render signup page again 😥
             }
         }
     } catch (error) {
-        console.log(error);
+        console.log(error); // Log any errors
     }
 }
 
@@ -250,63 +250,62 @@ const Activate = async (req, res) => {
 
 const SignIn = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const data = await Accounts.findOne({ Email: email });
-        if (data) {
-            let pass = await bcrypt.compare(password, data.Password);
-            let pass2 = await bcrypt.compare(data.Password, password);
-            if (pass || pass2) {
-                if (data.verification == true) {
-                    req.session.user = await data.Identity;
-                    setTimeout(() => {
-                        return res.redirect("/dashboard");
+        const { email, password } = req.body; // Get email and password
+        const data = await Accounts.findOne({ Email: email }); // Find the account 🔍
+        if (data) { // Check if account exists
+            let pass = await bcrypt.compare(password, data.Password); // Compare passwords (1)
+            let pass2 = await bcrypt.compare(data.Password, password); // Compare passwords (2)
+            if (pass || pass2) { // Passwords match? ✅
+                if (data.verification == true) { // Account verified?
+                    req.session.user = await data.Identity; // Set session user
+                    setTimeout(() => { // Redirect after delay
+                        return res.redirect("/dashboard"); // Redirect to dashboard 🚀
                     }, 2000);
                 } else {
-                    return res.render("Activation", { message: "Verify your account" });
+                    return res.render("Activation", { message: "Verify your account" }); // Render activation page
                 }
             } else {
-                return res.render("Signin", { message: "Error: Invalid credentials" });
+                return res.render("Signin", { message: "Error: Invalid credentials" }); // Invalid credentials error
             }
         } else {
-            return res.render("Signin", { message: "Error: Invalid credentials" });
+            return res.render("Signin", { message: "Error: Invalid credentials" }); // Invalid credentials error
         }
     } catch (error) {
-        console.log(error)
+        console.log(error) // Log any errors 😬
     }
 }
 
 const dashboardLoad = async (req, res) => {
     try {
-        const id = req.session.user;
-        const acc = await Accounts.findOne({ Identity: id });
+        const id = req.session.user; // Get user ID 🧑‍💻
+        const acc = await Accounts.findOne({ Identity: id }); // Find account
+        const skip = parseInt(req.query.skip) || 0; // Pagination skip value ➡️
+        const limit = 50; // Set limit to 50
+        let ques = await Question.find().sort({ Date: -1 }).skip(skip).limit(limit); // Fetch questions ❓
 
-        const skip = parseInt(req.query.skip) || 0;
-        const limit = 50;
-        let ques = await Question.find().sort({ Date: -1 }).skip(skip).limit(limit);
-
-        const answerCounts = await Answer.aggregate([
+        const answerCounts = await Answer.aggregate([ // Aggregate answer counts
             { $group: { _id: "$QID", count: { $sum: 1 } } }
         ]);
 
-        const answerCountMap = {};
-        answerCounts.forEach(item => {
+        const answerCountMap = {}; // Create count map
+        answerCounts.forEach(item => { // Populate the map
             answerCountMap[item._id] = item.count;
         });
 
-        ques = ques.map(q => ({
+        ques = ques.map(q => ({ // Map question data
             ...q._doc,
-            answerCount: answerCountMap[q.QID] || 0
+            answerCount: answerCountMap[q.QID] || 0 // Add answer count ➕
         }));
 
-        if (req.xhr) {
-            return res.json(ques);
+        if (req.xhr) { // Check AJAX request
+            return res.json(ques); // Return JSON response JSON
         }
 
-        const notifications = await Notifications.find({ NotifyTo: id });
-        const notificationMark = notifications.some(n => n.Read === false);
-        return res.render("Dashboard", { acc, ques, notificationMark });
-    } catch (error) {
-        console.log(error);
+        const notifications = await Notifications.find({ NotifyTo: id }); // Get notifications 🔔
+        const notificationMark = notifications.some(n => n.Read === false); // Check unread status
+        return res.render("Dashboard", { acc, ques, notificationMark }); // Render dashboard template 🖥️
+    } catch (error) { // Handle potential errors
+        console.log(error); // Log the error 🚨
     }
 };
 
