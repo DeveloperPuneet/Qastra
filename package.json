@@ -15,7 +15,7 @@
     "connect-mongodb-session": "^5.0.0",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
-    "express-session": "^1.18.1",
+    "express-session": "^1.18.2",
     "formidable": "^3.5.3",
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.2",
